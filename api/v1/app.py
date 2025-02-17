@@ -17,7 +17,7 @@ app.register_blueprint(app_views)
 def not_found_error(error):
     """Returns a JSON-formatted 404 status code response"""
     body = {"error": "Not found"}
-    response = make_response(jsonify(body))
+    response = make_response(jsonify(body), 404)
 
     return response
 

@@ -118,11 +118,6 @@ def update_user_by_id(user_id=None):
     if not request_body:
         abort(400, "Not a JSON")
 
-    request_body.pop('id', None)
-    request_body.pop('email', None)
-    request_body.pop('updated_at', None)
-    request_body.pop('created_at', None)
-
     skip_keys = ['id', 'email', 'updated_at', 'created_at']
     for k, v in request_body.items():
         if k not in skip_keys:

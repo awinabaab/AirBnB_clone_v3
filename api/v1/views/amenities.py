@@ -79,7 +79,9 @@ def create_amenity():
         400 error if the request body does not contain the key `name`
         201 and the Amenity object in JSON upon successful creation"""
 
-    request_body = request.get_json()
+    request_body = ""
+    if request.is_json:
+        request_body = request.get_json()
     if not request_body:
         abort(400, "Not a JSON")
 
@@ -106,11 +108,13 @@ def update_amenity(amenity_id=None):
         400 error if the request body is not a valid JSON
         200 and the updated Amenity object in JSON upon successful update"""
 
+    request_body = ""
     amenity = storage.get(Amenity, amenity_id)
     if not amenity:
         abort(404)
 
-    request_body = request.get_json()
+    if request.is_json:
+        request_body = request.get_json()
     if not request_body:
         abort(400, "Not a JSON")
 

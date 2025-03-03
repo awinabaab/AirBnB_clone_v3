@@ -75,8 +75,9 @@ def create_state():
         400 error if the request body is not a valid JSON
         400 error if the request body doesn't contain the key `name`
         201 and the State object upon successful creation"""
-
-    request_body = request.get_json()
+    request_body = ""
+    if request.is_json:
+        request_body = request.get_json()
     if not request_body:
         abort(400, "Not a JSON")
 
@@ -105,7 +106,9 @@ def update_state_by_id(state_id=None):
     if not state:
         abort(404)
 
-    request_body = request.get_json()
+    request_body = ""
+    if request.is_json:
+        request_body = request.get_json()
     if not request_body:
         abort(400, "Not a JSON")
 

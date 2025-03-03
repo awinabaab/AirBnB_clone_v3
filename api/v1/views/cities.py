@@ -88,12 +88,13 @@ def create_city(state_id=None):
         400 error if the request body is not a valid JSON
         400 error if the request body does not contain the key `name`
         201 and the City object upon succesful creation"""
-
     state = storage.get(State, state_id)
     if not state:
         abort(404)
 
-    request_body = request.get_json()
+    request_body = ""
+    if request.is_json:
+        request_body = request.get_json()
     if not request_body:
         abort(400, "Not a JSON")
 
@@ -126,7 +127,9 @@ def update_city_by_id(city_id=None):
     if not city:
         abort(404)
 
-    request_body = request.get_json()
+    request_body = ""
+    if request.is_json:
+        request_body = request.get_json()
     if not request_body:
         abort(400, "Not a JSON")
 

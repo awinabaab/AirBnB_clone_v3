@@ -120,7 +120,7 @@ def create_place_amenity(place_id=None, amenity_id=None):
         else:
             place.amenities.append(amenity)
         place.save()
-        response = make_response(jsonify(amenity.to_dict()), 201)
+        response = make_response(jsonify(amenity.to_dict()), 200)
     else:
         response = make_response(jsonify(amenity.to_dict()), 200)
 
